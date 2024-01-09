@@ -1,6 +1,8 @@
-# pyGzUAVSim
+# IndiflightHIL
 
-This is only supported for Ubuntu, specifically 22.04LTS.
+This is only supported for Ubuntu, specifically 22.04LTS. Heavily based on the SIL Plugins and related embedded code from https://github.com/osrf/vehicle_gateway which use UDP to a x86 build of betaflight. This project communicates with the FC over a spare serial port, for instance using an FTDI usb-to-serial interface. Seems like a bottleneck, but everything runs comfortably at 1kHz with approximately 6ms round-trip latency. Not quite the <1ms you would get with the FC to sensors/ESC comms, but good enough. At that latency, higher update rates make no sense, so I will be happy with the 1kHz.
+
+Forwarding of "GPS" data via UDP is also provided.
 
 ## Installing Gazebo
 
