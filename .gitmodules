@@ -1,0 +1,6 @@
+[submodule "external/Cyberzoo_gazebo_models"]
+	path = external/Cyberzoo_gazebo_models
+	url = https://github.com/tudelft/gazebo_models.git
+[submodule "gz-plugins/indiflight/pi-protocol"]
+	path = gz-plugins/indiflight/pi-protocol
+	url = git@github.com:tblaha/pi-protocol
