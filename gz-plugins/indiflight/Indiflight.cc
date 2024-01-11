@@ -875,6 +875,8 @@ void Indiflight::UpdateOdometry(const UpdateInfo &_info,
   if (err.failed())
     gzerr << "udp send failed with error " << err << std::endl;
 
+  gzerr << "sent at:" << _info.simTime.count() << std::endl;
+
   this->dataPtr->lastStatePubTime = _info.simTime;
 }
 

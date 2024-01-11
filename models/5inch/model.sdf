@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='5inch'>
+    <pose>0 0 .24 0 0 0</pose>
+    <!--<pose>0 0 0.24 0 0 3.1415</pose>-->
+    <self_collide>false</self_collide>
+    <static>false</static>
+    <link name="base_link">
+      <inertial>
+        <mass>0.520</mass>
+        <inertia>
+          <ixx>0.00144</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00155</iyy>
+          <iyz>0</iyz>
+          <izz>0.00177</izz>
+        </inertia>
+      </inertial>
+      <gravity>true</gravity>
+      <velocity_decay/>
+      <visual name="base_link_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+            <box>
+                <size>0.13 0.03 0.04</size>
+            </box>
+        </geometry>
+      </visual>
+      <collision name="base_link_collision_0">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.3 0.1</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>1000</update_rate>
+        <imu>
+            <angular_velocity>
+                <x>
+                    <noise type="gaussian">
+                        <mean>0</mean>
+                        <stddev>0.0</stddev>
+                        <!-- todo: bias -->
+                    </noise>
+                </x>
+                <y>
+                    <noise type="gaussian">
+                        <mean>0</mean>
+                        <stddev>0.0</stddev>
+                        <!-- todo: bias -->
+                    </noise>
+                </y>
+                <z>
+                    <noise type="gaussian">
+                        <mean>0</mean>
+                        <stddev>0.0</stddev>
+                        <!-- todo: bias -->
+                    </noise>
+                </z>
+            </angular_velocity>
+            <linear_acceleration>
+                <x>
+                    <noise type="gaussian">
+                        <mean>0</mean>
+                        <stddev>0.0</stddev>
+                        <!-- todo: bias -->
+                    </noise>
+                </x>
+                <y>
+                    <noise type="gaussian">
+                        <mean>0</mean>
+                        <stddev>0.0</stddev>
+                        <!-- todo: bias -->
+                    </noise>
+                </y>
+                <z>
+                    <noise type="gaussian">
+                        <mean>0</mean>
+                        <stddev>0.0</stddev>
+                        <!-- todo: bias -->
+                    </noise>
+                </z>
+            </linear_acceleration>
+            <enable_orientation>false</enable_orientation>
+        </imu>
+      </sensor>
+    </link>
+    <link name="rotor_0">
+      <gravity>true</gravity>
+      <self_collide>false</self_collide>
+      <velocity_decay/>
+      <pose>0.1 -0.075 0.02 0 0 0</pose>
+      <inertial>
+          <mass>0.0047</mass>
+          <inertia>
+            <ixx>5.7e-07</ixx>
+            <iyy>5.7e-06</iyy>
+            <izz>5.7e-06</izz>
+          </inertia>
+        </inertial>
+      <visual name="rotor_0_visual">
+        <pose>-0.00825 -0.0525 -0.006 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.3 0.3 0.3</scale>
+            <uri>model://CineRat/meshes/1345_prop_ccw.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name="rotor_0_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rotor_0</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+    <link name="rotor_1">
+      <gravity>true</gravity>
+      <self_collide>false</self_collide>
+      <velocity_decay/>
+      <pose>-0.1 0.075 0.02 0 0 0</pose>
+      <inertial>
+          <mass>0.0047</mass>
+          <inertia>
+            <ixx>5.7e-07</ixx>
+            <iyy>5.7e-06</iyy>
+            <izz>5.7e-06</izz>
+          </inertia>
+        </inertial>
+      <visual name="rotor_1_visual">
+        <pose>-0.00825 -0.0525 -0.006 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.3 0.3 0.3</scale>
+            <uri>model://CineRat/meshes/1345_prop_ccw.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name="rotor_1_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rotor_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+    <link name="rotor_2">
+      <gravity>true</gravity>
+      <self_collide>false</self_collide>
+      <velocity_decay/>
+      <pose>0.1 0.075 0.02 0 0 0</pose>
+      <inertial>
+          <mass>0.0047</mass>
+          <inertia>
+            <ixx>5.7e-07</ixx>
+            <iyy>5.7e-06</iyy>
+            <izz>5.7e-06</izz>
+          </inertia>
+        </inertial>
+      <visual name="rotor_2_visual">
+        <pose>-0.00825 -0.0525 -0.006 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.3 0.3 0.3</scale>
+            <uri>model://CineRat/meshes/1345_prop_cw.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name="rotor_2_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rotor_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+    <link name="rotor_3">
+      <gravity>true</gravity>
+      <self_collide>false</self_collide>
+      <velocity_decay/>
+      <pose>-0.1 -0.075 0.02 0 0 0</pose>
+      <inertial>
+          <mass>0.0047</mass>
+          <inertia>
+            <ixx>5.7e-07</ixx>
+            <iyy>5.7e-06</iyy>
+            <izz>5.7e-06</izz>
+          </inertia>
+        </inertial>
+      <visual name="rotor_3_visual">
+        <pose>-0.00825 -0.0525 -0.006 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.3 0.3 0.3</scale>
+            <uri>model://CineRat/meshes/1345_prop_cw.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name="rotor_3_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rotor_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+    <plugin filename="Indiflight" name="gz::sim::systems::Indiflight">
+        <odometry_link>base_link</odometry_link>
+        <odometry_streaming_address>10.0.0.1</odometry_streaming_address>
+        <odometry_streaming_port>5005</odometry_streaming_port>
+        <odometry_streaming_frequency>30</odometry_streaming_frequency>
+        <odometry_streaming_ac_id>1</odometry_streaming_ac_id>
+        <hil_device>/dev/ttyUSB0</hil_device>
+        <hil_baud>921600</hil_baud>
+        <actuator channel="1" motorNumber="0">
+            <commandTopic>/model/5inch/actuator_command</commandTopic>
+            <actuatorStateTopic>/model/5inch/actuator_state</actuatorStateTopic>
+            <multiplier>3200</multiplier>
+            <thrustNonlinearity>0.45</thrustNonlinearity>
+        </actuator>
+        <actuator channel="2" motorNumber="1">
+            <commandTopic>/model/5inch/actuator_command</commandTopic>
+            <actuatorStateTopic>/model/5inch/actuator_state</actuatorStateTopic>
+            <multiplier>3200</multiplier>
+            <thrustNonlinearity>0.45</thrustNonlinearity>
+        </actuator>
+        <actuator channel="3" motorNumber="2">
+            <commandTopic>/model/5inch/actuator_command</commandTopic>
+            <actuatorStateTopic>/model/5inch/actuator_state</actuatorStateTopic>
+            <multiplier>3200</multiplier>
+            <thrustNonlinearity>0.45</thrustNonlinearity>
+        </actuator>
+        <actuator channel="0" motorNumber="3">
+            <commandTopic>/model/5inch/actuator_command</commandTopic>
+            <actuatorStateTopic>/model/5inch/actuator_state</actuatorStateTopic>
+            <multiplier>3200</multiplier>
+            <thrustNonlinearity>0.45</thrustNonlinearity>
+        </actuator>
+    </plugin>
+    <plugin filename="MulticopterMotorModelTB" name="gz::sim::systems::MulticopterMotorModelTB">
+      <jointName>rotor_0_joint</jointName>
+      <linkName>rotor_0</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.02</timeConstantUp>
+      <timeConstantDown>0.02</timeConstantDown>
+      <maxTorqueUp>0.3</maxTorqueUp>
+      <maxTorqueDown>0.3</maxTorqueDown>
+      <rotorInertia>5.7e-6</rotorInertia>
+      <inertiaEffects>true</inertiaEffects>
+      <maxRotVelocity>3200.0</maxRotVelocity>
+      <motorConstant>1.4e-06</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>0</rotorDragCoefficient>
+      <rollingMomentCoefficient>0</rollingMomentCoefficient>
+      <!--<rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>-->
+      <rotorVelocitySlowdownSim>50</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+      <publishState>true</publishState>
+      <statePubFrequency>0</statePubFrequency>
+      <realTimeStrictness>1.1</realTimeStrictness>
+      <maxDrops>2</maxDrops>
+    </plugin>
+    <plugin filename="MulticopterMotorModelTB" name="gz::sim::systems::MulticopterMotorModelTB">
+      <jointName>rotor_1_joint</jointName>
+      <linkName>rotor_1</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.02</timeConstantUp>
+      <timeConstantDown>0.02</timeConstantDown>
+      <maxTorqueUp>0.3</maxTorqueUp>
+      <maxTorqueDown>0.3</maxTorqueDown>
+      <rotorInertia>5.7e-6</rotorInertia>
+      <inertiaEffects>true</inertiaEffects>
+      <maxRotVelocity>3200.0</maxRotVelocity>
+      <motorConstant>1.4e-06</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <motorNumber>1</motorNumber>
+      <rotorDragCoefficient>0</rotorDragCoefficient>
+      <rollingMomentCoefficient>0</rollingMomentCoefficient>
+      <!--<rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>-->
+      <rotorVelocitySlowdownSim>50</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+      <publishState>true</publishState>
+      <statePubFrequency>0</statePubFrequency>
+      <realTimeStrictness>1.1</realTimeStrictness>
+      <maxDrops>2</maxDrops>
+    </plugin>
+    <plugin filename="MulticopterMotorModelTB" name="gz::sim::systems::MulticopterMotorModelTB">
+      <jointName>rotor_2_joint</jointName>
+      <linkName>rotor_2</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.02</timeConstantUp>
+      <timeConstantDown>0.02</timeConstantDown>
+      <maxTorqueUp>0.3</maxTorqueUp>
+      <maxTorqueDown>0.3</maxTorqueDown>
+      <rotorInertia>5.7e-6</rotorInertia>
+      <inertiaEffects>true</inertiaEffects>
+      <maxRotVelocity>3200.0</maxRotVelocity>
+      <motorConstant>1.4e-06</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <motorNumber>2</motorNumber>
+      <rotorDragCoefficient>0</rotorDragCoefficient>
+      <rollingMomentCoefficient>0</rollingMomentCoefficient>
+      <!--<rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>-->
+      <rotorVelocitySlowdownSim>50</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+      <publishState>true</publishState>
+      <statePubFrequency>0</statePubFrequency>
+      <realTimeStrictness>1.1</realTimeStrictness>
+      <maxDrops>2</maxDrops>
+    </plugin>
+    <plugin filename="MulticopterMotorModelTB" name="gz::sim::systems::MulticopterMotorModelTB">
+      <jointName>rotor_3_joint</jointName>
+      <linkName>rotor_3</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.02</timeConstantUp>
+      <timeConstantDown>0.02</timeConstantDown>
+      <maxTorqueUp>0.3</maxTorqueUp>
+      <maxTorqueDown>0.3</maxTorqueDown>
+      <rotorInertia>5.7e-6</rotorInertia>
+      <inertiaEffects>true</inertiaEffects>
+      <maxRotVelocity>3200.0</maxRotVelocity>
+      <motorConstant>1.4e-06</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <motorNumber>3</motorNumber>
+      <rotorDragCoefficient>0</rotorDragCoefficient>
+      <rollingMomentCoefficient>0</rollingMomentCoefficient>
+      <!--<rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>-->
+      <rotorVelocitySlowdownSim>50</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+      <publishState>true</publishState>
+      <statePubFrequency>0</statePubFrequency>
+      <realTimeStrictness>1.1</realTimeStrictness>
+      <maxDrops>2</maxDrops>
+    </plugin>
+  </model>
+</sdf>
