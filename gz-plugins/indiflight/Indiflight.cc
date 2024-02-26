@@ -321,17 +321,16 @@ void Indiflight::Configure(const Entity &_entity,
   struct serial_struct old_serinfo, new_serinfo;
   if (ioctl(fd, TIOCGSERIAL, &old_serinfo) < 0) {
     gzerr << "Cannot get serial info" << std::endl;
-    return;
+  } else {
+    new_serinfo = old_serinfo;
+    new_serinfo.flags &= ~ASYNC_LOW_LATENCY; // is this line even needed?
+    new_serinfo.flags |= ASYNC_LOW_LATENCY;
+
+    if (ioctl(fd, TIOCSSERIAL, &new_serinfo) < 0) {
+      gzerr << "Cannot set serial info" << std::endl;
+    }
   }
 
-  new_serinfo = old_serinfo;
-  new_serinfo.flags &= ~ASYNC_LOW_LATENCY; // is this line even needed?
-  new_serinfo.flags |= ASYNC_LOW_LATENCY;
-
-  if (ioctl(fd, TIOCSSERIAL, &new_serinfo) < 0) {
-    gzerr << "Cannot set serial info" << std::endl;
-    return;
-  }
 
   this->dataPtr->serialFd = fd;
 
@@ -766,7 +765,7 @@ bool Indiflight::InitSockets(sdf::ElementPtr _sdf)
   int port = _sdf->Get("odometry_streaming_port", static_cast<uint32_t>(5005)).first;
   this->dataPtr->udp_ac_id = _sdf->Get("odometry_streaming_ac_id", static_cast<uint32_t>(1)).first;
 
-  double stateFreq = _sdf->Get<double>("odomoetry_streaming_frequency", 30).first;
+  double stateFreq = _sdf->Get<double>("odometry_streaming_frequency", 30).first;
   if (stateFreq > 0)
   {
     std::chrono::duration<double> period{1 / stateFreq};
@@ -842,7 +841,7 @@ void Indiflight::UpdateOdometry(const UpdateInfo &_info,
 
   // already ENU, I thought...
   pose_t pose {
-    .timeUs = 1, // fixme
+    .timeUs = _info.simTime.count(), // fixme
     .x = (float) -modelPose.Pos().Y(),
     .y = (float) modelPose.Pos().X(),
     .z = (float) modelPose.Pos().Z(),
@@ -852,7 +851,7 @@ void Indiflight::UpdateOdometry(const UpdateInfo &_info,
     .qw = (float) modelPose.Rot().W(),
   };
   pose_der_t pose_der {
-    .timeUs = 1, // fixme
+    .timeUs = _info.simTime.count(), // fixme
     .x = (float) -vel.Y(),
     .y = (float) vel.X(),
     .z = (float) vel.Z(),

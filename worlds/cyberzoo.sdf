@@ -146,8 +146,8 @@
     </model>
     <include>
         <!-- <uri>model://x500</uri> -->
-        <!-- <uri>model://CineRat</uri> -->
-        <uri>model://5inch</uri>
+        <uri>model://CineRat</uri>
+        <!-- <uri>model://5inch</uri> -->
     </include>
     <light name='sunUTC' type='directional'>
       <pose>0 0 500 0 -0 0</pose>

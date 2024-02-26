@@ -264,9 +264,9 @@
         <odometry_link>base_link</odometry_link>
         <odometry_streaming_address>10.0.0.1</odometry_streaming_address>
         <odometry_streaming_port>5005</odometry_streaming_port>
-        <odometry_streaming_frequency>30</odometry_streaming_frequency>
+        <odometry_streaming_frequency>20</odometry_streaming_frequency>
         <odometry_streaming_ac_id>1</odometry_streaming_ac_id>
-        <hil_device>/dev/ttyUSB0</hil_device>
+        <hil_device>/dev/indiflight/hil</hil_device>
         <hil_baud>921600</hil_baud>
         <actuator channel="1" motorNumber="0">
             <commandTopic>/model/CineRat/actuator_command</commandTopic>
