@@ -172,3 +172,5 @@ profile.txt
 profile*.txt
 temp/
 *.csv
+
+models/generated/
