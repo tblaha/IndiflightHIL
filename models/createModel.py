@@ -248,12 +248,8 @@ class UAV(object):
         hil_baud.text = "921600"
 
 class Rotor(object):
-    def __init__(self, id, channel=None):
-        self._id = id
-        if channel is not None:
-            self._channel = channel
-        else:
-            self._channel = id
+    def __init__(self, channel):
+        self._channel = channel
 
         self._pos      = np.zeros(3, dtype=float)
         self._axis     = np.array([0., 0., -1.], dtype=float)
@@ -300,6 +296,7 @@ class Multirotor(UAV):
     def __init__(self, name):
         super().__init__(name)
         self._rotors = []
+        self._rotor_channels = []
 
     def addRotor(self, rotor):
         self._n += 1
@@ -310,6 +307,9 @@ class Multirotor(UAV):
 
         for i, rotor in enumerate(self._rotors):
             link = ET.SubElement(self._m, "link")
+            if rotor._channel in self._rotor_channels:
+                raise ValueError("Cannot have duplicate rotor channels!")
+
             link.set("name", f"rotor_{i}")
 
             gravity = ET.SubElement(link, "gravity")
@@ -425,7 +425,7 @@ class Multirotor(UAV):
             momentConstant.text = str(rotor._cm)
 
             motorNumber = ET.SubElement(plugin, "motorNumber")
-            motorNumber.text = str(rotor._id)
+            motorNumber.text = str(i)
 
             rotorDragCoefficient = ET.SubElement(plugin, "rotorDragCoefficient")
             rotorDragCoefficient.text = "0"
@@ -544,9 +544,9 @@ if __name__=="__main__":
 
     # rotors properties
     RR = Rotor(0)
-    FR = deepcopy(RR); FR._id = FR._channel = 1
-    RL = deepcopy(RR); RL._id = RL._channel = 2
-    FL = deepcopy(RR); FL._id = FL._channel = 3
+    FR = deepcopy(RR); FR._channel = 1
+    RL = deepcopy(RR); RL._channel = 2
+    FL = deepcopy(RR); FL._channel = 3
 
     RR.setPose((-0.0455, 0.0635, -0.02), direction="cw")
     FR.setPose((0.0455, 0.0635, -0.02), direction="ccw")

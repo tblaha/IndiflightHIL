@@ -174,3 +174,5 @@ temp/
 *.csv
 
 models/generated/
+models/greatness/
+*.pkl
